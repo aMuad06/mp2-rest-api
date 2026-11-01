@@ -13,7 +13,7 @@ class DatasetStorage:
         self._counter += 1
         dataset_id = self._counter
         self._store[dataset_id] = {"filename": filename, "df": df.copy()}
-        logger.debug("Stored dataset: id=%d, rows=%d", dataset_id, len(df))
+        logger.debug(f"Stored dataset: id={dataset_id}, rows={len(df)}")
         return dataset_id
 
     def get(self, dataset_id):
@@ -22,7 +22,7 @@ class DatasetStorage:
         if entry is None:
             return None
         df = entry["df"]
-        logger.debug("Retrieved dataset copy: id=%d, rows=%d", dataset_id, len(df))
+        logger.debug(f"Retrieved dataset copy: id={dataset_id}, rows={len(df)}")
         return df.copy()
 
     def get_metadata(self, dataset_id):
@@ -44,7 +44,7 @@ class DatasetStorage:
         if dataset_id not in self._store:
             return False
         self._store[dataset_id]["df"] = df.copy()
-        logger.debug("Updated dataset: id=%d, rows=%d", dataset_id, len(df))
+        logger.debug(f"Updated dataset: id={dataset_id}, rows={len(df)}")
         return True
 
     def clear(self):
